@@ -19,7 +19,8 @@ function useSafeDispatch(dispatch) {
 //   run(fetchPokemon(pokemonName))
 // }, [pokemonName, run])
 const defaultInitialState = {status: 'idle', data: null, error: null}
-function useAsync(initialState) {
+
+const useAsync = initialState => {
   const initialStateRef = React.useRef({
     ...defaultInitialState,
     ...initialState,
@@ -53,15 +54,18 @@ function useAsync(initialState) {
     [safeSetState],
   )
 
-  const setData = React.useCallback(data => safeSetState({data}), [
-    safeSetState,
-  ])
-  const setError = React.useCallback(error => safeSetState({error}), [
-    safeSetState,
-  ])
-  const reset = React.useCallback(() => safeSetState(initialStateRef.current), [
-    safeSetState,
-  ])
+  const setData = React.useCallback(
+    data => safeSetState({data}),
+    [safeSetState],
+  )
+  const setError = React.useCallback(
+    error => safeSetState({error}),
+    [safeSetState],
+  )
+  const reset = React.useCallback(
+    () => safeSetState(initialStateRef.current),
+    [safeSetState],
+  )
 
   return {
     // using the same names that react-query uses for convenience

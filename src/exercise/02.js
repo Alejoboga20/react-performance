@@ -3,7 +3,7 @@
 
 import * as React from 'react'
 import {useCombobox} from '../use-combobox'
-import {getItems} from '../filter-cities'
+import {getItems} from '../workerized-filter-cities'
 import {useForceRerender} from '../utils'
 
 function Menu({
